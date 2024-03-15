@@ -1,0 +1,174 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("")
+gui.SS_Form1..size(5850,3795)
+gui.SS_Form1..minx(0)
+gui.SS_Form1..miny(0)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,Unload)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.lbl_mltxtComments.create(label,"Comments",True,1800,200,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_mltxtComments.defaultvalue("")
+gui.SS_Form1.lbl_mltxtComments.controlgroup(0)
+gui.SS_Form1.mltxtComments.create(textboxm)
+gui.SS_Form1.mltxtComments.text("")
+gui.SS_Form1.mltxtComments.visible(True)
+gui.SS_Form1.mltxtComments.size(5400,2385)
+gui.SS_Form1.mltxtComments.zorder(0)
+gui.SS_Form1.mltxtComments.position(100,335)
+gui.SS_Form1.mltxtComments.enabled(True)
+gui.SS_Form1.mltxtComments.alignment(0)
+gui.SS_Form1.mltxtComments.fontname("Arial")
+gui.SS_Form1.mltxtComments.fontsize(8)
+gui.SS_Form1.mltxtComments.BackColor(-2147483643)
+gui.SS_Form1.mltxtComments.defaultvalue("")
+gui.SS_Form1.mltxtComments.controlgroup(0)
+gui.SS_Form1.cmdSave.create(button)
+gui.SS_Form1.cmdSave.caption("Save")
+gui.SS_Form1.cmdSave.visible(True)
+gui.SS_Form1.cmdSave.size(1000,360)
+gui.SS_Form1.cmdSave.zorder(0)
+gui.SS_Form1.cmdSave.position(70,2820)
+gui.SS_Form1.cmdSave.enabled(True)
+gui.SS_Form1.cmdSave.fontname("Arial")
+gui.SS_Form1.cmdSave.fontsize(8)
+gui.SS_Form1.cmdSave.event(click,cmdsave_click)
+gui.SS_Form1.cmdSave.defaultvalue("")
+gui.SS_Form1.cmdSave.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.sSalesOrderNumber.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+'Quote 4794-1
+'ERM
+'this quote will work with another gab scripted named GCG_SO_Comments.gas
+V.Local.sError.Declare(String)
+V.Local.bCheck.Declare(Boolean,False)
+
+F.Intrinsic.Control.If(V.Caller.Hook,=,11560)
+	V.Passed.000201.Set("Comments")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Caller.Hook,=,11910)
+	F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+	F.ODBC.Connection!con.TableExists("GCG_SO_COMMENTS",V.Local.bCheck)
+	F.Intrinsic.Control.If(V.Local.bCheck,=,False)
+		F.Intrinsic.UI.Msgbox("The Sql table GCG_SO_COMMENTS was not found. Please create the table in Pervasive.","Export Cancelled!")
+		F.Intrinsic.Control.CallSub(Unload)
+	F.Intrinsic.Control.EndIf
+	V.Global.sSalesOrderNumber.Set(V.Passed.000003)
+	F.Intrinsic.Control.If(V.Global.sSalesOrderNumber.Trim,<>,"")
+		F.Intrinsic.String.LPad(V.Global.sSalesOrderNumber,"0",7,V.Global.sSalesOrderNumber)
+		F.Intrinsic.Control.CallSub(Checkcomments)
+		Gui.SS_Form1..Show
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments1.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+Program.Sub.Unload.Start
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+Program.Sub.Unload.End
+
+program.sub.cmdsave_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdsave_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+
+'save comments to custom table
+f.Intrinsic.String.Build("Select * FROM GCG_SO_Comments Where Order_NO = '{0}'",v.Global.sSalesOrderNumber,v.Local.sSQL)
+F.ODBC.Connection!con.OpenLocalRecordsetRW("rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,True)
+	F.ODBC.con!rst.AddNew
+	F.ODBC.con!rst.Set!Order_NO(V.Global.sSalesOrderNumber)
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Set!Comments(V.Screen.SS_Form1!mltxtComments.Text)
+F.ODBC.con!rst.Update
+F.ODBC.con!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdsave_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments1.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdsave_click.end
+
+Program.Sub.CheckComments.Start
+F.Intrinsic.Control.SetErrorHandler("CheckComments_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+
+'check for comments
+f.Intrinsic.String.Build("Select * From GCG_SO_Comments Where Order_No = '{0}'",v.Global.sSalesOrderNumber,v.Local.sSQL)
+F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+	Gui.SS_Form1.mltxtComments.Text(V.ODBC.con!rst.FieldValTrim!Comments)
+F.Intrinsic.Control.EndIf
+F.ODBC.con!rst.Close
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("CheckComments_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments1.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.CheckComments.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_SO_Comments1$}$ERIC$}$10/18/2013
+Program.Sub.Comments.End
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Comments
+SS_Form1.CTRL{{NAME::mltxtComments\\TYPE::8\\CAPTION::Comments\\GROUP::-1\\BROWSER::0\\SIZE::3
+SS_Form1.CTRL{{NAME::cmdSave\\TYPE::5\\CAPTION::Save\\GROUP::-1\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
+
