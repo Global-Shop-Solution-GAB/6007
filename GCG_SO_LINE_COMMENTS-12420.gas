@@ -1,0 +1,207 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("SO Line Comments")
+gui.SS_Form1..size(6375,3035)
+gui.SS_Form1..minx(0)
+gui.SS_Form1..miny(0)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,UNLOAD)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(True)
+gui.SS_Form1..minbutton(True)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(True)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.txtOrder.create(textbox,"",True,1800,300,0,100,335,True,0,Arial,8,-2147483643,1)
+gui.SS_Form1.txtOrder.defaultvalue("")
+gui.SS_Form1.txtOrder.controlgroup(0)
+gui.SS_Form1.txtComments.create(textboxm)
+gui.SS_Form1.txtComments.text("")
+gui.SS_Form1.txtComments.visible(True)
+gui.SS_Form1.txtComments.size(5850,855)
+gui.SS_Form1.txtComments.zorder(0)
+gui.SS_Form1.txtComments.position(100,1035)
+gui.SS_Form1.txtComments.enabled(True)
+gui.SS_Form1.txtComments.alignment(0)
+gui.SS_Form1.txtComments.fontname("Arial")
+gui.SS_Form1.txtComments.fontsize(8)
+gui.SS_Form1.txtComments.BackColor(-2147483643)
+gui.SS_Form1.txtComments.defaultvalue("")
+gui.SS_Form1.txtComments.controlgroup(0)
+gui.SS_Form1.lblOrder.create(label,"Order No.",True,1935,255,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lblOrder.defaultvalue("")
+gui.SS_Form1.lblOrder.controlgroup(0)
+gui.SS_Form1.lblComments.create(label,"Comments",True,1935,255,1,100,835,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lblComments.defaultvalue("")
+gui.SS_Form1.lblComments.controlgroup(0)
+gui.SS_Form1.cmdDelete.create(button)
+gui.SS_Form1.cmdDelete.caption("Delete")
+gui.SS_Form1.cmdDelete.visible(True)
+gui.SS_Form1.cmdDelete.size(1000,375)
+gui.SS_Form1.cmdDelete.zorder(0)
+gui.SS_Form1.cmdDelete.position(1185,2060)
+gui.SS_Form1.cmdDelete.enabled(True)
+gui.SS_Form1.cmdDelete.fontname("Arial")
+gui.SS_Form1.cmdDelete.fontsize(8)
+gui.SS_Form1.cmdDelete.event(click,cmddelete_Comments)
+gui.SS_Form1.cmdDelete.defaultvalue("")
+gui.SS_Form1.cmdDelete.controlgroup(0)
+gui.SS_Form1.cmdSave_Comments.create(button)
+gui.SS_Form1.cmdSave_Comments.caption("Save")
+gui.SS_Form1.cmdSave_Comments.visible(True)
+gui.SS_Form1.cmdSave_Comments.size(1000,375)
+gui.SS_Form1.cmdSave_Comments.zorder(0)
+gui.SS_Form1.cmdSave_Comments.position(100,2060)
+gui.SS_Form1.cmdSave_Comments.enabled(True)
+gui.SS_Form1.cmdSave_Comments.fontname("Arial")
+gui.SS_Form1.cmdSave_Comments.fontsize(8)
+gui.SS_Form1.cmdSave_Comments.event(click,cmdsave_comments)
+gui.SS_Form1.cmdSave_Comments.defaultvalue("")
+gui.SS_Form1.cmdSave_Comments.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.sOrder.Declare(String)
+Variable.Global.sLine.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.ODBC.Connection!CONX.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+F.Intrinsic.Control.If(V.Caller.Hook,=,12420)
+	F.Intrinsic.Control.CallSub(Get_comments)
+F.Intrinsic.Control.EndIf
+
+
+
+Program.Sub.Main.End
+
+Program.Sub.Get_Comments.Start
+'DECLARE VARIABLES
+'-----------------------------------------------------------------------------------------
+V.Local.sError.Declare(String)
+V.Local.bTable.Declare(Boolean)
+V.Local.sSQL.Declare(String)
+V.Local.sOrderLine.Declare(String)
+'-----------------------------------------------------------------------------------------
+'CHECK IF TABLE EXISTS. IF IT DOES NOT, CLOSE CONNECTION, AND EXIT PROGRAM
+'-----------------------------------------------------------------------------------------
+F.ODBC.Connection!ConX.TableExists("GCG_SO_COMMENTS",V.Local.bTable)
+F.Intrinsic.Control.If(V.Local.bTable,=,False)
+	F.intrinsic.ui.msgbox("Missing Table GCG_SO_COMMENTS. Please Create Table and Try Again")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.Endif
+'-----------------------------------------------------------------------------------------
+'GET ORDER NO. SAVE TO A GLOBAL VARIABLE - PAD TO MATCH REQUIRED LENGTH
+'-----------------------------------------------------------------------------------------
+'Get Order Number and Line
+V.Global.sOrder.Set(V.Passed.000060)
+V.Global.sLine.Set(V.Passed.000051)
+
+
+'Check to make sure an Order has been selected. If not, give error, and exit program
+F.Intrinsic.Control.If(V.Global.sOrder,=,"")
+	F.Intrinsic.UI.Msgbox("You Must Select an Order First")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+'Pad Order No to match required length of 7. Pad with preceeding 0's
+F.Intrinsic.String.LPad(V.Global.sOrder,"0",7,V.Global.sOrder)
+F.Intrinsic.String.LPad(V.Global.sLine,"0",3,V.Global.sLine)
+F.Intrinsic.String.RPad(V.Global.sLine,"0",4,V.Global.sLine)
+
+'-----------------------------------------------------------------------------------------
+'CHECK IF COMMENTS RECORD EXIST IN TABLE. IF THEY DO, DISPLAY THEM, OTHERWISE, DISPLAY BLANK FORM
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.String.Concat("SELECT * FROM GCG_SO_COMMENTS WHERE ORDER_NO = '",V.Global.sOrder,"' AND ORDER_LINE = '",V.Global.sLine,"'",V.Local.sSQL)
+F.ODBC.Connection!ConX.OpenLocalRecordsetRO("rstComments",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.ConX!rstComments.EOF,=,False)
+'Set text from record
+	F.Intrinsic.String.Concat(V.ODBC.ConX!rstComments.FieldValTrim!ORDER_NO," - ",V.ODBC.ConX!rstComments.FieldValTrim!ORDER_LINE,V.Local.sOrderLine)
+	Gui.SS_Form1.txtOrder.Text(V.Local.sOrderLine)
+	Gui.SS_Form1.txtComments.Text(V.ODBC.ConX!rstComments.FieldValTrim!COMMENTS)
+	Gui.SS_Form1.txtOrder.Enabled(False)
+F.Intrinsic.Control.Else
+'Set "order" from variable.
+	F.Intrinsic.String.Concat(V.Global.sOrder," - ",V.Global.sLine,V.Local.sOrderLine)
+	Gui.SS_Form1.txtOrder.Text(V.Local.sOrderLine)
+	Gui.SS_Form1.txtOrder.Enabled(False)
+	Gui.SS_Form1.cmdDelete.Enabled(False)
+F.Intrinsic.Control.EndIf
+'close recordset
+F.ODBC.ConX!rstComments.Close
+'show form
+Gui.SS_FORM1..SHOW
+'-----------------------------------------------------------------------------------------
+'ERROR HANDLING BELOW
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("GetComments_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_CUST_ORD_STATUS.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.Get_Comments.End
+
+Program.Sub.UNLOAD.Start
+F.ODBC.Connection!CONX.Close
+F.Intrinsic.Control.End
+
+Program.Sub.UNLOAD.End
+
+program.sub.cmdsave_comments.start
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+'-----------------------------------------------------------------------------------------
+'CHECK TO MAKE SURE USER HAS ENTERED TEXT. IF THERE IS TEXT, CHECK TABLE TO FIND OUT IF A RECORD ALREADY EXISTS FOR THIS ORDER. IF IT DOES, UPDATE, IF NOT, ADD A NEW RECORD
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.Control.If(V.Screen.SS_Form1!txtComments.Text,<>,"")
+	F.Intrinsic.String.Concat("SELECT * FROM GCG_SO_COMMENTS WHERE ORDER_NO = '",V.Global.sOrder,"' AND ORDER_LINE = '",V.Global.sLine,"'",V.Local.sSQL)
+	F.ODBC.Connection!ConX.OpenLocalRecordsetRW("rstComments",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.ConX!rstComments.EOF,=,True)
+		F.ODBC.ConX!rstComments.AddNew
+		F.ODBC.ConX!rstComments.Set!ORDER_NO(V.Global.sOrder)
+		F.ODBC.ConX!rstComments.Set!ORDER_LINE(V.Global.sLine)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.ConX!rstComments.Set!COMMENTS(V.Screen.SS_Form1!txtComments.Text)
+	F.ODBC.ConX!rstComments.Update
+	F.ODBC.ConX!rstComments.Close
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("You Must Enter Text in the "Comments" Section to Save")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+program.sub.cmdsave_comments.end
+
+program.sub.cmddelete_Comments.start
+'DECLARE VARIABLES
+'-----------------------------------------------------------------------------------------
+V.Local.sError.Declare(String)
+V.local.sSQL.Declare(String)
+'-----------------------------------------------------------------------------------------
+'DELETE RECORD FROM TABLE THAT MATCHES SELECTED ORDER. THEN EXIT PROGRAM
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.String.Concat("DELETE FROM GCG_SO_COMMENTS WHERE ORDER_NO ='",V.Global.sOrder,"' AND ORDER_LINE = '",V.Global.sLine,"'",V.Local.sSQL)
+F.ODBC.Connection!ConX.Execute(V.Local.sSQL)
+F.Intrinsic.Control.CallSub(Unload)
+
+program.sub.cmddelete_Comments.end
+
+Program.Sub.Comments.Start
+${$0$}$GCG_SO_LINE_COMMENTS$}$BLEFLER$}$2/20/2014
+Program.Sub.Comments.End
+
