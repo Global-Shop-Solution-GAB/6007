@@ -1,0 +1,849 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Customer Order Status")
+gui.SS_Form1..size(6105,5525)
+gui.SS_Form1..minx(0)
+gui.SS_Form1..miny(0)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,unload)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.lbl_dtpStart.create(label,"Date Start",True,1800,200,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_dtpStart.defaultvalue("")
+gui.SS_Form1.lbl_dtpStart.controlgroup(0)
+gui.SS_Form1.dtpStart.create(datepicker)
+gui.SS_Form1.dtpStart.visible(True)
+gui.SS_Form1.dtpStart.size(1800,345)
+gui.SS_Form1.dtpStart.zorder(0)
+gui.SS_Form1.dtpStart.position(100,335)
+gui.SS_Form1.dtpStart.enabled(True)
+gui.SS_Form1.dtpStart.checkbox(False)
+gui.SS_Form1.dtpStart.defaultvalue("")
+gui.SS_Form1.dtpStart.controlgroup(0)
+gui.SS_Form1.lbl_dtpEnd.create(label,"Date End",True,1800,200,1,1985,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_dtpEnd.defaultvalue("")
+gui.SS_Form1.lbl_dtpEnd.controlgroup(0)
+gui.SS_Form1.dtpEnd.create(datepicker)
+gui.SS_Form1.dtpEnd.visible(True)
+gui.SS_Form1.dtpEnd.size(1800,345)
+gui.SS_Form1.dtpEnd.zorder(0)
+gui.SS_Form1.dtpEnd.position(1985,335)
+gui.SS_Form1.dtpEnd.enabled(True)
+gui.SS_Form1.dtpEnd.checkbox(False)
+gui.SS_Form1.dtpEnd.defaultvalue("")
+gui.SS_Form1.dtpEnd.controlgroup(0)
+gui.SS_Form1.lbl_txtStart.create(label,"Customer Start",True,1800,200,1,100,850,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtStart.defaultvalue("")
+gui.SS_Form1.lbl_txtStart.controlgroup(0)
+gui.SS_Form1.txtStart.create(textbox,"",True,1800,330,0,100,1050,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtStart.event(lostfocus,txtstart_lostfocus)
+gui.SS_Form1.txtStart.defaultvalue("")
+gui.SS_Form1.txtStart.controlgroup(0)
+gui.SS_Form1.cmd_txtStart.create(button)
+gui.SS_Form1.cmd_txtStart.caption("^")
+gui.SS_Form1.cmd_txtStart.visible(True)
+gui.SS_Form1.cmd_txtStart.size(330,330)
+gui.SS_Form1.cmd_txtStart.zorder(0)
+gui.SS_Form1.cmd_txtStart.position(1985,1050)
+gui.SS_Form1.cmd_txtStart.enabled(True)
+gui.SS_Form1.cmd_txtStart.fontname("Arial")
+gui.SS_Form1.cmd_txtStart.fontsize(8)
+gui.SS_Form1.cmd_txtStart.event(click,cmd_txtstart_click)
+gui.SS_Form1.cmd_txtStart.defaultvalue("")
+gui.SS_Form1.cmd_txtStart.controlgroup(0)
+gui.SS_Form1.lbl_txtEnd.create(label,"Customer End",True,1800,200,1,2455,850,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lbl_txtEnd.defaultvalue("")
+gui.SS_Form1.lbl_txtEnd.controlgroup(0)
+gui.SS_Form1.txtEnd.create(textbox,"",True,1800,330,0,2455,1050,True,0,Arial,8,16777215,1)
+gui.SS_Form1.txtEnd.defaultvalue("")
+gui.SS_Form1.txtEnd.controlgroup(0)
+gui.SS_Form1.cmd_txtEnd.create(button)
+gui.SS_Form1.cmd_txtEnd.caption("^")
+gui.SS_Form1.cmd_txtEnd.visible(True)
+gui.SS_Form1.cmd_txtEnd.size(330,330)
+gui.SS_Form1.cmd_txtEnd.zorder(0)
+gui.SS_Form1.cmd_txtEnd.position(4340,1050)
+gui.SS_Form1.cmd_txtEnd.enabled(True)
+gui.SS_Form1.cmd_txtEnd.fontname("Arial")
+gui.SS_Form1.cmd_txtEnd.fontsize(8)
+gui.SS_Form1.cmd_txtEnd.event(click,cmd_txtend_click)
+gui.SS_Form1.cmd_txtEnd.defaultvalue("")
+gui.SS_Form1.cmd_txtEnd.controlgroup(0)
+gui.SS_Form1.chkAll.create(checkbox)
+gui.SS_Form1.chkAll.caption("All Customers")
+gui.SS_Form1.chkAll.visible(True)
+gui.SS_Form1.chkAll.size(1800,300)
+gui.SS_Form1.chkAll.zorder(0)
+gui.SS_Form1.chkAll.position(100,1550)
+gui.SS_Form1.chkAll.enabled(True)
+gui.SS_Form1.chkAll.alignment(0)
+gui.SS_Form1.chkAll.fontname("Arial")
+gui.SS_Form1.chkAll.fontsize(8)
+gui.SS_Form1.chkAll.event(click,chkall_click)
+gui.SS_Form1.chkAll.defaultvalue("")
+gui.SS_Form1.chkAll.controlgroup(0)
+gui.SS_Form1.lvwCust.create(listview)
+gui.SS_Form1.lvwCust.view(3)
+gui.SS_Form1.lvwCust.addlistviewcolumn("Key",0,0)
+gui.SS_Form1.lvwCust.addlistviewcolumn("Customer Start",1803,0)
+gui.SS_Form1.lvwCust.addlistviewcolumn("Customer End",1803,0)
+gui.SS_Form1.lvwCust.visible(True)
+gui.SS_Form1.lvwCust.size(5720,2000)
+gui.SS_Form1.lvwCust.zorder(0)
+gui.SS_Form1.lvwCust.position(100,1935)
+gui.SS_Form1.lvwCust.enabled(True)
+gui.SS_Form1.lvwCust.fontname("Arial")
+gui.SS_Form1.lvwCust.fontsize(8)
+gui.SS_Form1.lvwCust.event(itemclick,lvwcust_itemclick)
+gui.SS_Form1.cmd_lvwCustAdd.create(button)
+gui.SS_Form1.cmd_lvwCustAdd.caption("Add")
+gui.SS_Form1.cmd_lvwCustAdd.visible(True)
+gui.SS_Form1.cmd_lvwCustAdd.size(1000,330)
+gui.SS_Form1.cmd_lvwCustAdd.zorder(0)
+gui.SS_Form1.cmd_lvwCustAdd.position(4810,1050)
+gui.SS_Form1.cmd_lvwCustAdd.enabled(True)
+gui.SS_Form1.cmd_lvwCustAdd.fontname("Arial")
+gui.SS_Form1.cmd_lvwCustAdd.fontsize(8)
+gui.SS_Form1.cmd_lvwCustAdd.event(click,cmd_lvwcustadd_click)
+gui.SS_Form1.cmd_lvwCustAdd.SetInternationalID(7600)
+gui.SS_Form1.cmd_lvwCustAdd.defaultvalue("")
+gui.SS_Form1.cmd_lvwCustAdd.controlgroup(0)
+gui.SS_Form1.cmd_lvwCustDelete.create(button)
+gui.SS_Form1.cmd_lvwCustDelete.caption("Delete")
+gui.SS_Form1.cmd_lvwCustDelete.visible(True)
+gui.SS_Form1.cmd_lvwCustDelete.size(1000,330)
+gui.SS_Form1.cmd_lvwCustDelete.zorder(0)
+gui.SS_Form1.cmd_lvwCustDelete.position(100,4020)
+gui.SS_Form1.cmd_lvwCustDelete.enabled(True)
+gui.SS_Form1.cmd_lvwCustDelete.fontname("Arial")
+gui.SS_Form1.cmd_lvwCustDelete.fontsize(8)
+gui.SS_Form1.cmd_lvwCustDelete.event(click,cmd_lvwcustdelete_click)
+gui.SS_Form1.cmd_lvwCustDelete.SetInternationalID(171500)
+gui.SS_Form1.cmd_lvwCustDelete.defaultvalue("")
+gui.SS_Form1.cmd_lvwCustDelete.controlgroup(0)
+gui.SS_Form1.cmd_lvwCustClear.create(button)
+gui.SS_Form1.cmd_lvwCustClear.caption("Clear")
+gui.SS_Form1.cmd_lvwCustClear.visible(True)
+gui.SS_Form1.cmd_lvwCustClear.size(1000,330)
+gui.SS_Form1.cmd_lvwCustClear.zorder(0)
+gui.SS_Form1.cmd_lvwCustClear.position(1185,4020)
+gui.SS_Form1.cmd_lvwCustClear.enabled(True)
+gui.SS_Form1.cmd_lvwCustClear.fontname("Arial")
+gui.SS_Form1.cmd_lvwCustClear.fontsize(8)
+gui.SS_Form1.cmd_lvwCustClear.event(click,cmd_lvwcustclear_click)
+gui.SS_Form1.cmd_lvwCustClear.SetInternationalID(106700)
+gui.SS_Form1.cmd_lvwCustClear.defaultvalue("")
+gui.SS_Form1.cmd_lvwCustClear.controlgroup(0)
+gui.SS_Form1.cmdExport.create(button)
+gui.SS_Form1.cmdExport.caption("Report")
+gui.SS_Form1.cmdExport.visible(True)
+gui.SS_Form1.cmdExport.size(1000,360)
+gui.SS_Form1.cmdExport.zorder(0)
+gui.SS_Form1.cmdExport.position(100,4550)
+gui.SS_Form1.cmdExport.enabled(True)
+gui.SS_Form1.cmdExport.fontname("Arial")
+gui.SS_Form1.cmdExport.fontsize(8)
+gui.SS_Form1.cmdExport.event(click,cmdexport_click)
+gui.SS_Form1.cmdExport.defaultvalue("")
+gui.SS_Form1.cmdExport.controlgroup(0)
+gui.SS_Form1.dtpStart.tabstop(True)
+gui.SS_Form1.dtpStart.tabindex(1)
+gui.SS_Form1.dtpEnd.tabstop(True)
+gui.SS_Form1.dtpEnd.tabindex(2)
+gui.SS_Form1.txtStart.tabstop(True)
+gui.SS_Form1.txtStart.tabindex(3)
+gui.SS_Form1.cmd_txtStart.tabstop(True)
+gui.SS_Form1.cmd_txtStart.tabindex(4)
+gui.SS_Form1.txtEnd.tabstop(True)
+gui.SS_Form1.txtEnd.tabindex(5)
+gui.SS_Form1.cmd_txtEnd.tabstop(True)
+gui.SS_Form1.cmd_txtEnd.tabindex(6)
+gui.SS_Form1.cmd_lvwCustAdd.tabstop(True)
+gui.SS_Form1.cmd_lvwCustAdd.tabindex(7)
+gui.SS_Form1.chkAll.tabstop(True)
+gui.SS_Form1.chkAll.tabindex(8)
+gui.SS_Form1.cmd_lvwCustDelete.tabstop(True)
+gui.SS_Form1.cmd_lvwCustDelete.tabindex(9)
+gui.SS_Form1.cmd_lvwCustClear.tabstop(True)
+gui.SS_Form1.cmd_lvwCustClear.tabindex(10)
+gui.SS_Form1.cmdExport.tabstop(True)
+gui.SS_Form1.cmdExport.tabindex(11)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Variable.UDT.uReport.Define("Description",String,Description)
+Variable.UDT.uReport.Define("Date_Due",String,Date_Due)
+Variable.UDT.uReport.Define("Part",String,Part)
+Variable.UDT.uReport.Define("Order_No",String,Order_No)
+Variable.UDT.uReport.Define("Qty_Ordered",Float,Qty_Ordered)
+Variable.UDT.uReport.Define("Job",String,Job)
+Variable.UDT.uReport.Define("Suffix",String,Suffix)
+Variable.UDT.uReport.Define("Qty_Shipped",Float,Qty_Shipped)
+Variable.UDT.uReport.Define("Date_Item_Prom",String,Date_Item_Prom)
+Variable.UDT.uReport.Define("Date_Due_Line",String,Date_Due_Line)
+Variable.UDT.uReport.Define("Comments",String,Comments)
+Variable.UDT.uReport.Define("User_1",String,User_1)
+Variable.UDT.uReport.Define("PercentComplete",Float)
+Variable.UDT.uReport.Define("Customer",String,Customer)
+Variable.UDT.uReport.Define("Customer_PO",String,Customer_PO)
+Variable.UDT.uReport.Define("Date_Order",String,Date_Order)
+Variable.UDT.uReport.Define("PO_Qty_Order",Float,Qty_ORDER)
+Variable.uGlobal.uReport.Declare("uReport")
+Variable.Global.sFileDestination.Declare(String)
+Variable.Global.iKey.Declare(Long,0)
+Variable.Global.sKey.Declare(String)
+Variable.Global.iOrdinal.Declare(Long,0)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+'Quote 4794-1
+'Custom hook
+'ERM
+'this program works in conjunction with GCG_SO_Comments1.gas
+
+V.Local.sError.Declare(String)
+V.Local.bCheck.Declare(Boolean,False)
+
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+'check if users machine has Excel
+'F.Automation.MSExcel.CheckPresence(V.Local.bCheck)
+'F.Intrinsic.Control.If(V.Local.bCheck,=,False)
+'	F.Intrinsic.UI.Msgbox("MsExcel cannot be found on this machine.  Please install MsExcel.","Export Cancelled!")
+'	F.Intrinsic.Control.CallSub(Unload)
+'F.Intrinsic.Control.EndIf
+
+'check if the path for the upload exists
+'F.Intrinsic.String.Concat(V.Caller.FilesDir,"\Export",V.Global.sFileDestination)
+'F.Intrinsic.File.Exists(V.Global.sFileDestination,V.Local.bCheck)
+'F.Intrinsic.Control.If(V.Local.bCheck,=,False)
+'	F.Intrinsic.UI.Msgbox("Directory: Global\Files\Export\ was not found. Please create the Export folder.","Export Cancelled!")
+'	F.Intrinsic.Control.CallSub(Unload)
+'F.Intrinsic.Control.EndIf
+
+'check if the custom table holding the notes exist
+F.ODBC.Connection!con.TableExists("GCG_SO_COMMENTS",V.Local.bCheck)
+F.Intrinsic.Control.If(V.Local.bCheck,=,False)
+	F.Intrinsic.UI.Msgbox("The Sql table GCG_SO_COMMENTS was not found. Please create the table in Pervasive.","Export Cancelled!")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+F.ODBC.Connection!con.TableExists("GCG_SO_Report",V.Local.bCheck)
+F.Intrinsic.Control.If(V.Local.bCheck,=,False)
+	F.Intrinsic.UI.Msgbox("The Sql table GCG_SO_Report was not found. Please create the table in Pervasive.","Export Cancelled!")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+Gui.SS_Form1..Show
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+Program.Sub.Unload.Start
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+Program.Sub.Unload.End
+
+program.sub.cmdexport_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdexport_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sCust.Declare(String)
+V.Local.sDateStart.Declare(String)
+V.Local.sDateEnd.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sKey.Declare(String)
+V.Local.i.Declare(Long)
+V.Local.iOrd.Declare(Long)
+V.uGlobal.uReport.Redim(-1,-1)
+V.Local.iUB.Declare(Long)
+
+F.Intrinsic.UI.InvokeWaitDialog("Loading...","Please Wait...")
+
+'format dates
+F.Intrinsic.String.Format(V.Screen.SS_Form1!dtpStart.Value,"YYYY-MM-DD",V.Local.sDateStart)
+F.Intrinsic.String.Format(V.Screen.SS_Form1!dtpEnd.Value,"YYYY-MM-DD",V.Local.sDateEnd)
+
+
+'find records based on gab screen selection
+F.Intrinsic.String.Concat("Select V_Order_Header.Date_Order, V_Order_Header.Customer_PO, V_Order_Lines.Part, V_Order_Lines.Description, V_Order_Header.Date_Due, V_Order_Lines.Order_No, V_Order_Lines.Qty_Ordered, V_Order_Lines.User_1, ","",V.Local.sSQL)
+F.Intrinsic.String.Concat(V.Local.sSQL,"V_Job_Header.Job, V_Job_Header.Suffix, V_Order_Lines.Qty_Shipped, V_Order_Lines.Date_Item_Prom, GCG_SO_Comments.Comments,V_Order_Lines.Customer, V_PO_Lines.Date_Due_Line, V_PO_Lines.Qty_Order ",V.Local.sSQL)
+F.Intrinsic.String.Concat(V.Local.sSQL,"FROM V_Order_Lines ",V.Local.sSQL)
+F.Intrinsic.String.Concat(V.Local.sSQL,"INNER JOIN V_Order_Header ON V_Order_Lines.Order_NO = V_Order_Header.Order_NO ",V.Local.sSQL)
+F.Intrinsic.String.Concat(V.Local.sSQL,"INNER JOIN V_Order_To_WO ON  V_Order_Lines.Order_NO = V_Order_To_WO.Order_NO AND V_Order_Lines.Record_No = V_Order_To_WO.Order_Line ",V.Local.sSQL)
+F.Intrinsic.String.Concat(V.Local.sSQL,"INNER JOIN V_Job_Header ON V_Order_To_WO.Job=V_Job_Header.Job AND V_Order_To_WO.Suffix=V_Job_Header.Suffix ",V.Local.sSQL)
+F.Intrinsic.String.Concat(V.Local.sSQL,"INNER JOIN V_PO_Lines ON V_Job_Header.Job=V_PO_Lines.Job AND V_Job_Header.Suffix=V_PO_Lines.Suffix ",V.Local.sSQL)
+F.Intrinsic.String.Concat(V.Local.sSQL,"LEFT OUTER JOIN GCG_SO_Comments ON V_Order_Header.Order_No=GCG_SO_Comments.Order_No ",V.Local.sSQL)
+
+'search by all customers or one customer
+F.Intrinsic.Control.If(V.Screen.SS_Form1!chkAll.Value,=,1)
+	F.Intrinsic.String.Concat(V.Local.sSQL,"WHERE V_Order_Lines.Date_Item_Prom Between '",V.Local.sDateStart,"' AND '",V.Local.sDateEnd,"' Order By V_Order_Header.Customer,V_Order_Lines.Part",V.Local.sSQL)
+	F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+		F.Intrinsic.Variable.LoadUDTFromRecordset("rst","con","v.uGlobal.uReport",False)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Close
+F.Intrinsic.Control.Else
+	Gui.SS_Form1.lvwCust.RetrieveAllListItems(V.Local.sKey)
+	F.Intrinsic.Control.If(V.Local.sKey.Trim,=,"***NORETURN***")
+		F.Intrinsic.UI.Msgbox("Pick a customer range(s) OR All customers.")
+		F.Intrinsic.Control.ExitSub
+	F.Intrinsic.Control.EndIf
+	F.Intrinsic.String.Split(V.Local.sKey,"*!*",V.Local.sKey)
+	F.Intrinsic.Control.For(V.Local.i,0,V.Local.sKey.UBound,1)
+		Gui.SS_Form1.lvwCust.ListItemKeyToOrdinal(V.Local.sKey(v.Local.i),V.Local.iOrd)
+		V.Local.sCust.Set(V.Screen.SS_Form1!lvwCust.ListItemTextExtended(v.Local.iOrd))
+		F.Intrinsic.String.Split(V.Local.sCust,"*!*",V.Local.sCust)
+		F.Intrinsic.String.Concat(V.Local.sSQL,"WHERE V_Order_Lines.Date_Item_Prom Between '",V.Local.sDateStart,"' AND '",V.Local.sDateEnd,"' AND V_Order_Lines.Customer between '",V.Local.sCust(1).Trim,"' and '",V.Local.sCust(2).Trim,"' Order By V_Order_Header.Customer,V_Order_Lines.Part",V.Local.sSQL)
+		F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+		F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+			F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+				V.Local.iUB.Set(V.uGlobal.uReport.UBound)
+				F.Intrinsic.Math.Add(V.Local.iUB,1,V.Local.iUB)
+				F.Intrinsic.Control.If(V.Local.iUB,=,0)
+					V.uGlobal.uReport.Redim(0,0)
+				F.Intrinsic.Control.Else
+					V.uGlobal.uReport.RedimPreserve(V.uGlobal.uReport.LBound,V.Local.iUB)
+				F.Intrinsic.Control.EndIf
+				V.uGlobal.uReport(v.Local.iUB)!Customer.Set(V.ODBC.con!rst.FieldValTrim!Customer)
+				V.uGlobal.uReport(v.Local.iUB)!Customer_PO.Set(V.ODBC.con!rst.FieldValTrim!Customer_PO)
+				V.uGlobal.uReport(v.Local.iUB)!Description.Set(V.ODBC.con!rst.FieldValTrim!Description)
+				V.uGlobal.uReport(v.Local.iUB)!Date_Due.Set(V.ODBC.con!rst.FieldValTrim!Date_Due)
+				V.uGlobal.uReport(v.Local.iUB)!Date_Order.Set(V.ODBC.con!rst.FieldValTrim!Date_Order)
+				V.uGlobal.uReport(v.Local.iUB)!Part.Set(V.ODBC.con!rst.FieldValTrim!Part)
+				V.uGlobal.uReport(v.Local.iUB)!Order_No.Set(V.ODBC.con!rst.FieldValTrim!Order_No)
+				V.uGlobal.uReport(v.Local.iUB)!Qty_Ordered.Set(V.ODBC.con!rst.FieldValFloat!Qty_Ordered)
+				V.uGlobal.uReport(v.Local.iUB)!Job.Set(V.ODBC.con!rst.FieldValTrim!Job)
+				V.uGlobal.uReport(v.Local.iUB)!Suffix.Set(V.ODBC.con!rst.FieldValTrim!Suffix)
+				V.uGlobal.uReport(v.Local.iUB)!Qty_Shipped.Set(V.ODBC.con!rst.FieldValTrim!Qty_Shipped)
+				V.uGlobal.uReport(v.Local.iUB)!Date_Item_Prom.Set(V.ODBC.con!rst.FieldValTrim!Date_Item_Prom)
+				V.uGlobal.uReport(v.Local.iUB)!Date_Due_Line.Set(V.ODBC.con!rst.FieldValTrim!Date_Due_Line)
+				V.uGlobal.uReport(v.Local.iUB)!Comments.Set(V.ODBC.con!rst.FieldValTrim!Comments)
+				V.uGlobal.uReport(v.Local.iUB)!PO_Qty_Order.Set(V.ODBC.con!rst.FieldValFloat!Qty_Order)
+				F.ODBC.con!rst.MoveNext
+			F.Intrinsic.Control.Loop
+		F.Intrinsic.Control.EndIf
+		F.ODBC.con!rst.Close
+	F.Intrinsic.Control.Next(V.Local.i)
+F.Intrinsic.Control.EndIf
+
+'if UDT empty, let the user know!
+F.Intrinsic.Control.If(V.uGlobal.uReport.UBound,=,-1)
+	F.Intrinsic.UI.Msgbox("No records found. Export cancelled.")
+	F.Intrinsic.UI.CloseWaitDialog
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.CallSub(Percentcomplete)
+F.Intrinsic.UI.CloseWaitDialog
+F.Intrinsic.Control.CallSub(Report)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdexport_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdexport_click.end
+
+program.sub.cmd_txtstart_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_txtstart_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sRet.Declare(String)
+
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+F.Intrinsic.UI.Browser(205,"",V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtStart.Text(V.Local.sRet(0))
+	Gui.SS_Form1.txtEnd.Text(V.Local.sRet(0))
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_txtstart_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_txtstart_click.end
+
+Program.Sub.BuildExcel.Start
+F.Intrinsic.Control.SetErrorHandler("BuildExcel_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.i.Declare(Long)
+V.Local.sFileName.Declare(String)
+V.Local.sFQP.Declare(String)
+V.Local.sDateTime.Declare(String)
+V.Local.iRow.Declare(Long,2)
+V.Local.iCol.Declare(Long,1)
+V.Local.sJobSuffix.Declare(String)
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+
+'format file name and path
+F.Intrinsic.String.Format(V.Ambient.Now,"YYYYMMDD_HHNNSSAM/PM",V.Local.sDateTime)
+F.Intrinsic.String.Concat(V.Global.sFileDestination,"\",V.Local.sDateTime,".xls",V.Local.sFQP)
+
+'create a excel file
+Function.Automation.MSExcel.CreateAppObject("MSExcel")
+Function.Automation.MSExcel.CreateWorkbook("MSExcel","ExcelWB",V.Local.sFQP)
+Function.Automation.MSExcel.OpenWorksheet("ExcelWB","ExcelWS",1)
+
+' transfer data from UDT to Excel spreadsheet
+F.Intrinsic.Control.For(V.Local.i,V.uGlobal.uReport.LBound,V.uGlobal.uReport,1)
+	F.Intrinsic.UI.ChangeWaitStatus("Loading Excel...",V.Local.i,V.uGlobal.uReport.LBound,V.uGlobal.uReport.UBound)
+	F.Intrinsic.Control.If(V.Local.i,=,0)
+		F.Intrinsic.Control.CallSub(Excelheader)
+	F.Intrinsic.Control.EndIf
+	'PO number
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!Customer_PO)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Part
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!Part)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Part Description
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!Description)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Date Due
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!Date_Due)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Order Number
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!Order_No)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Qty Ordered
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!Qty_Ordered)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Job-suffix
+	V.Local.sJobSuffix.Set(V.uGlobal.uReport(v.Local.i)!Job)
+	F.Intrinsic.Control.If(V.uGlobal.uReport(v.Local.i)!Suffix,<>,"")
+		F.Intrinsic.String.Concat(V.Local.sJobSuffix,"-",V.uGlobal.uReport(v.Local.i)!Suffix,V.Local.sJobSuffix)
+	F.Intrinsic.Control.EndIf
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.Local.sJobSuffix)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Qty Shipped
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!Qty_Shipped)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Date Item Promise
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!Date_Item_Prom)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'PO Delivery date
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!User_1)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Machining Complete %
+	F.Intrinsic.Control.CallSub(Percentcomplete,"Ord",V.Local.i)
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!PercentComplete)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Date Due Line
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!Date_Item_Prom)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Comments
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,V.uGlobal.uReport(v.Local.i)!Comments)
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+	'Row count
+	Function.Intrinsic.Math.Add(Variable.Local.iRow,1,Variable.Local.iRow)
+	Variable.Local.iCol.Set(1)
+F.Intrinsic.Control.Next(V.Local.i)
+
+'Save excel file
+Function.Automation.MSExcel.SaveWorkbook("ExcelWB")
+
+'delete objects
+F.Automation.MSExcel.DestroyAllObjects("MsExcel","ExcelWB","ExcelWS")
+
+F.Intrinsic.UI.Msgbox("Export Successful!")
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("BuildExcel_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.BuildExcel.End
+
+Program.Sub.ExcelHeader.Start
+F.Intrinsic.Control.SetErrorHandler("ExcelHeader_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.iRow.Declare(Long,1)
+V.Local.iCol.Declare(Long,1)
+
+'PO number
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"PO NUMBERr")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'Part
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"DRAWING")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'Part Description
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol," PART DESC")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'Date Due
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"PO ISSUE DATE")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'Order Number
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"SALES ORDER")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'Qty Ordered
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"QTY ON ORDER")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'Job-suffix
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"SICOM W/O")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'Qty Shipped
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"TOTAL QTY SHIPPED")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'Date Item Promise
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"PO DELIVERY")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'PO Delivery date
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"SHIP DATE")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'Machining Complete %
+	Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"MACHINING COMPLETE %")
+	Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'Date Due Line
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"MAT'L ETA")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+'Comments
+Function.Automation.MSExcel.WriteCell("ExcelWS",Variable.Local.iRow,Variable.Local.iCol,"COMMENTS")
+Function.Intrinsic.Math.Add(Variable.Local.iCol,1,Variable.Local.iCol)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("ExcelHeader_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.ExcelHeader.End
+
+Program.Sub.PercentComplete.Start
+F.Intrinsic.Control.SetErrorHandler("PercentComplete_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sJob.Declare(String)
+V.Local.sSuffix.Declare(String)
+V.Local.iOrd.Declare(Long)
+V.Local.fGrandTotal.Declare(Float,0)
+V.Local.fTotalClosed.Declare(Float,0)
+V.Local.fTemp.Declare(Float,0)
+V.Local.i.Declare(Long)
+
+F.Intrinsic.Control.For(V.Local.i,V.uGlobal.uReport.LBound,V.uGlobal.uReport.UBound,1)
+	F.Intrinsic.UI.ChangeWaitStatus("Loading...",V.Local.i,V.uGlobal.uReport.LBound,V.uGlobal.uReport.UBound)
+	'get grand total of hours estimated for job
+	F.Intrinsic.String.Build("Select COUNT(Hours_Estimated) as Hours_Estimated From V_Job_Operations Where Job = '{0}' and Suffix = '{1}' and LMO = '{2}'",V.uGlobal.uReport(v.Local.i)!Job,V.uGlobal.uReport(v.Local.i)!Suffix,"L",V.Local.sSQL)
+	F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+		V.Local.fGrandTotal.Set(V.ODBC.con!rst.FieldValFloat!Hours_Estimated)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Close
+
+	'get total hours estimated for closed seq on job suffix
+	F.Intrinsic.String.Build("Select COUNT(Hours_Estimated) as Hours_Estimated From V_Job_Operations Where Job = '{0}' and Suffix = '{1}' and Flag_Closed = '{2}' and LMO = '{3}'",V.uGlobal.uReport(v.Local.i)!Job,V.uGlobal.uReport(v.Local.i)!Suffix,"Y","L",V.Local.sSQL)
+	F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+		V.Local.fTotalClosed.Set(V.ODBC.con!rst.FieldValFloat!Hours_Estimated)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Close
+
+	'if unit_open = unit_complete and not flagged as Closed, consider the record closed
+	F.Intrinsic.String.Build("Select * From V_Job_Operations Where Job = '{0}' and Suffix = '{1}' and Flag_Closed <> '{2}' and LMO = '{3}'",V.uGlobal.uReport(v.Local.i)!Job,V.uGlobal.uReport(v.Local.i)!Suffix,"Y","L",V.Local.sSQL)
+	F.ODBC.Connection!con.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.con!rst.EOF,=,False)
+		F.Intrinsic.Control.DoUntil(V.ODBC.con!rst.EOF,=,True)
+			F.Intrinsic.Control.If(V.ODBC.con!rst.FieldValFloat!Units_Open,=,V.ODBC.con!rst.FieldValFloat!Units_Complete)
+				F.Intrinsic.Math.Add(V.Local.fTotalClosed,V.ODBC.con!rst.FieldValFloat!Hours_Estimated,V.Local.fTotalClosed)
+			F.Intrinsic.Control.EndIf
+			F.ODBC.con!rst.MoveNext
+		F.Intrinsic.Control.Loop
+	F.Intrinsic.Control.EndIf
+	F.ODBC.con!rst.Close
+
+	'calculate the percentage by dividing the total closed by grand total on job
+	F.Intrinsic.Control.If(V.Local.fGrandTotal,<>,0)
+		F.Intrinsic.Control.If(V.Local.fTotalClosed,<>,0)
+			F.Intrinsic.Math.Div(V.Local.fTotalClosed,V.Local.fGrandTotal,V.Local.fTemp)
+			F.Intrinsic.Math.Mult(V.Local.fTemp,100,V.Local.fGrandTotal)
+			V.uGlobal.uReport(v.Local.iOrd)!PercentComplete.Set(V.Local.fGrandTotal)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("PercentComplete_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.PercentComplete.End
+
+program.sub.cmd_lvwcustdelete_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_lvwcustdelete_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+Gui.SS_Form1.lvwCust.RetrieveItemOrdinal(V.Global.sKey,V.Global.iOrdinal)
+Gui.SS_Form1.lvwCust.RemoveItem(V.Global.sKey)
+V.Global.sKey.Set("")
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_lvwcustdelete_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_lvwcustdelete_click.end
+
+program.sub.cmd_lvwcustclear_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_lvwcustclear_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+Gui.SS_Form1.txtStart.Text("")
+Gui.SS_Form1.txtEnd.Text("")
+Gui.SS_Form1.lvwCust.ClearItems
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_lvwcustclear_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_lvwcustclear_click.end
+
+program.sub.cmd_lvwcustadd_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_lvwcustadd_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Intrinsic.Control.If(V.Screen.SS_Form1!txtStart.Text,=,"")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.If(V.Screen.SS_Form1!txtEnd.Text,=,"")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Math.Add(V.Global.iKey,1,V.Global.iKey)
+Gui.SS_Form1.lvwCust.AddListItem(V.Global.iKey,V.Global.iKey)
+Gui.SS_Form1.lvwCust.SetListItemSubItemText(V.Global.iKey,1,V.Screen.SS_Form1!txtStart.Text)
+Gui.SS_Form1.lvwCust.SetListItemSubItemText(V.Global.iKey,2,V.Screen.SS_Form1!txtEnd.Text)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_lvwcustadd_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_lvwcustadd_click.end
+
+program.sub.cmd_txtend_click.start
+F.Intrinsic.Control.SetErrorHandler("cmd_txtend_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sRet.Declare(String)
+
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+F.Intrinsic.UI.Browser(205,"",V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtEnd.Text(V.Local.sRet(0))
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmd_txtend_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmd_txtend_click.end
+
+program.sub.chkall_click.start
+F.Intrinsic.Control.SetErrorHandler("chkall_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Intrinsic.Control.If(V.Screen.SS_Form1!chkAll.Value,=,1)
+	Gui.SS_Form1.txtStart.Text("")
+	Gui.SS_Form1.txtEnd.Text("")
+	Gui.SS_Form1.cmd_lvwCustAdd.Enabled(False)
+	Gui.SS_Form1.lvwCust.ClearItems
+F.Intrinsic.Control.Else
+	Gui.SS_Form1.cmd_lvwCustAdd.Enabled(True)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("chkall_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.chkall_click.end
+
+program.sub.lvwcust_itemclick.start
+F.Intrinsic.Control.SetErrorHandler("lvwcust_itemclick_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Global.sKey.Set(V.Args.ItemKey)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("lvwcust_itemclick_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.lvwcust_itemclick.end
+
+Program.Sub.Report.Start
+F.Intrinsic.Control.SetErrorHandler("Report_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sParam.Declare(String)
+V.Local.sParamVal.Declare(String)
+V.Local.iRptID.Declare(Long)
+
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!PO_Qty_Order,"PO_Qty_Order")
+F.Intrinsic.Variable.SetUDTFieldReference(V.uGlobal.uReport!PercentComplete,"PercentComplete")
+
+F.ODBC.Connection!con.Execute("Delete From GCG_SO_Report")
+F.Intrinsic.Debug.Stop
+F.ODBC.Connection!con.OpenLocalRecordsetRW("rst","Select * From GCG_SO_Report")
+f.Intrinsic.Variable.SaveUDTToRecordset("con","rst","v.uGlobal.uReport")
+F.ODBC.con!rst.Close
+
+V.Local.sParam.Set("")
+V.Local.sParamVal.Set("")
+F.Global.BI.GetIDFromName("GCG_SO_Report.rpt",V.Local.iRptID)
+F.Global.BI.PrintReport(V.Local.iRptID,0,V.Local.sParam,V.Local.sParamVal,"",False)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Report_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Report.End
+
+program.sub.txtstart_lostfocus.start
+F.Intrinsic.Control.SetErrorHandler("txtstart_lostfocus_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+Gui.SS_Form1.txtEnd.Text(V.Screen.SS_Form1!txtStart.Text)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("txtstart_lostfocus_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_SO_Comments.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.txtstart_lostfocus.end
+
+Program.Sub.Comments.Start
+${$0$}$GCG_SO_Comments$}$ERIC$}$10/7/2013
+Program.Sub.Comments.End
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Export to Excel
+SS_Form1.CTRL{{NAME::dtpStart\\TYPE::6\\CAPTION::Date Start\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::dtpEnd\\TYPE::6\\CAPTION::Date End\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtStart\\TYPE::2\\CAPTION::Customer Start\\RANGE::lvwCust\\GROUP::2\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::txtEnd\\TYPE::2\\CAPTION::Customer End\\RANGE::lvwCust\\GROUP::2\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::chkAll\\TYPE::9\\CAPTION::All Customers\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::lvwCust\\TYPE::7\\RANGE::lvwCust\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdExport\\TYPE::5\\CAPTION::Export\\GROUP::3\\BROWSER::0\\SIZE::1
+Program.Sub.ScreenSS.End
+
