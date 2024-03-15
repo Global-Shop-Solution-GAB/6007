@@ -1,0 +1,53 @@
+-- Database: GLOBALTRN Metadata version: 2 Exported: Jun 5, 2020
+-- Begin Tables
+SET LEGACYTYPESALLOWED = ON;
+-- Begin Multi-Line Statement
+CREATE TABLE "GCG_ADDITIONAL_WO" USING 'GCG_ADDITIONAL_WO000.mkd' PAGESIZE=4096 (
+ "ORDER_LINE" CHAR(12),
+ "JOB" CHAR(6),
+ "SUFFIX" CHAR(3) );
+-- End Multi-Line Statement
+-- Begin Multi-Line Statement
+CREATE TABLE "GCG_BI_CUST_STATUS" USING 'GCG_BI_CUST_STATUS.mkd' PAGESIZE=4096 (
+ "PART" CHAR(20),
+ "DESCRIPTION" CHAR(30),
+ "ORDER_NO" CHAR(7),
+ "RECORD_NO" CHAR(4),
+ "QTY_ORDERED" CHAR(50),
+ "QTY_SHIPPED" CHAR(50),
+ "JOB" CHAR(6),
+ "SUFFIX" CHAR(3),
+ "DATE_ITEM_PROM" CHAR(12),
+ "DATE_ORDER" CHAR(12),
+ "DATE_DEL" CHAR(12),
+ "DATE_SHIP" CHAR(12),
+ "PERCENT_COMP" INTEGER,
+ "DATE_MAT_DUE" CHAR(12),
+ "TYPE" CHAR(1),
+ "CUSTOMER_PO" CHAR(20),
+ "CUSTOMER" CHAR(6),
+ "TRMNL" CHAR(3),
+ "COMMENTS" CHAR(1),
+ "QTY_BO" CHAR(50) );
+-- End Multi-Line Statement
+-- Begin Multi-Line Statement
+CREATE TABLE "GCG_SO_Comments" USING 'GCG_SO_Comments.mkd' PAGESIZE=4096 (
+ "Order_No" CHAR(7),
+ "Order_Line" CHAR(4),
+ "Comments" LONGVARCHAR );
+-- End Multi-Line Statement
+-- Begin Multi-Line Statement
+CREATE TABLE "GCG_SO_LINE_DATEDEL" USING 'GCG_SO_LINE_DATEDEL.mkd' PAGESIZE=4096 (
+ "ORDER_NO" CHAR(78),
+ "ORDER_LINE" CHAR(4),
+ "INVOICE_NO" CHAR(6),
+ "DATE_DEL" DATE );
+-- End Multi-Line Statement
+-- Begin Multi-Line Statement
+CREATE TABLE "GCG_SO_LINE_DATESHIP" USING 'GCG_SO_LINE_DATESHIP.mkd' PAGESIZE=4096 (
+ "ORDER_NO" CHAR(7),
+ "ORDER_LINE" CHAR(4),
+ "DATE_SHIP" DATE );
+-- End Multi-Line Statement
+SET LEGACYTYPESALLOWED = OFF;
+-- End Tables
