@@ -1,0 +1,395 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form5..create
+gui.SS_Form5..caption("Select Option")
+gui.SS_Form5..size(1965,1920)
+gui.SS_Form5..minx(0)
+gui.SS_Form5..miny(0)
+gui.SS_Form5..position(0,0)
+gui.SS_Form5..event(unload,UNLOAD)
+gui.SS_Form5..alwaysontop(False)
+gui.SS_Form5..fontname("Arial")
+gui.SS_Form5..fontsize(8)
+gui.SS_Form5..forecolor(0)
+gui.SS_Form5..fontstyle(,,,,)
+gui.SS_Form5..BackColor(-2147483633)
+gui.SS_Form5..controlbox(True)
+gui.SS_Form5..maxbutton(True)
+gui.SS_Form5..minbutton(True)
+gui.SS_Form5..mousepointer(0)
+gui.SS_Form5..moveable(True)
+gui.SS_Form5..sizeable(True)
+gui.SS_Form5..ShowInTaskBar(True)
+gui.SS_Form5..titlebar(True)
+gui.SS_Form5.cmdDelDate.create(button)
+gui.SS_Form5.cmdDelDate.caption("Delivered Date")
+gui.SS_Form5.cmdDelDate.visible(True)
+gui.SS_Form5.cmdDelDate.size(1250,375)
+gui.SS_Form5.cmdDelDate.zorder(0)
+gui.SS_Form5.cmdDelDate.position(250,250)
+gui.SS_Form5.cmdDelDate.enabled(True)
+gui.SS_Form5.cmdDelDate.fontname("Arial")
+gui.SS_Form5.cmdDelDate.fontsize(8)
+gui.SS_Form5.cmdDelDate.event(click,cmd_DelDate)
+gui.SS_Form5.cmdDelDate.defaultvalue("")
+gui.SS_Form5.cmdDelDate.controlgroup(0)
+gui.SS_Form5.cmdComments.create(button)
+gui.SS_Form5.cmdComments.caption("Comments")
+gui.SS_Form5.cmdComments.visible(True)
+gui.SS_Form5.cmdComments.size(1250,375)
+gui.SS_Form5.cmdComments.zorder(0)
+gui.SS_Form5.cmdComments.position(250,850)
+gui.SS_Form5.cmdComments.enabled(True)
+gui.SS_Form5.cmdComments.fontname("Arial")
+gui.SS_Form5.cmdComments.fontsize(8)
+gui.SS_Form5.cmdComments.event(click,cmd_Comments)
+gui.SS_Form5.cmdComments.defaultvalue("")
+gui.SS_Form5.cmdComments.controlgroup(0)
+
+
+gui.SS_Form4..create
+gui.SS_Form4..caption("Del. Date")
+gui.SS_Form4..size(2535,2525)
+gui.SS_Form4..minx(0)
+gui.SS_Form4..miny(0)
+gui.SS_Form4..position(0,0)
+gui.SS_Form4..event(unload,ss_form4_unload)
+gui.SS_Form4..alwaysontop(False)
+gui.SS_Form4..fontname("Arial")
+gui.SS_Form4..fontsize(8)
+gui.SS_Form4..forecolor(0)
+gui.SS_Form4..fontstyle(,,,,)
+gui.SS_Form4..BackColor(-2147483633)
+gui.SS_Form4..controlbox(True)
+gui.SS_Form4..maxbutton(True)
+gui.SS_Form4..minbutton(True)
+gui.SS_Form4..mousepointer(0)
+gui.SS_Form4..moveable(True)
+gui.SS_Form4..sizeable(True)
+gui.SS_Form4..ShowInTaskBar(True)
+gui.SS_Form4..titlebar(True)
+gui.SS_Form4.lblOrderLine.create(label,"Order No.",True,1800,255,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form4.lblOrderLine.defaultvalue("")
+gui.SS_Form4.lblOrderLine.controlgroup(0)
+gui.SS_Form4.lblDateDel.create(label,"Date Delivered",True,1935,255,1,100,835,True,0,Arial,8,-2147483633,0)
+gui.SS_Form4.lblDateDel.defaultvalue("")
+gui.SS_Form4.lblDateDel.controlgroup(0)
+gui.SS_Form4.txtOrderLine.create(textbox,"",True,1800,330,0,100,335,True,0,Arial,8,-2147483643,1)
+gui.SS_Form4.txtOrderLine.defaultvalue("")
+gui.SS_Form4.txtOrderLine.controlgroup(0)
+gui.SS_Form4.dtpDelDate.create(datepicker)
+gui.SS_Form4.dtpDelDate.visible(True)
+gui.SS_Form4.dtpDelDate.size(1800,345)
+gui.SS_Form4.dtpDelDate.zorder(0)
+gui.SS_Form4.dtpDelDate.position(100,1035)
+gui.SS_Form4.dtpDelDate.enabled(True)
+gui.SS_Form4.dtpDelDate.checkbox(False)
+gui.SS_Form4.dtpDelDate.defaultvalue("")
+gui.SS_Form4.dtpDelDate.controlgroup(0)
+gui.SS_Form4.cmdSave.create(button)
+gui.SS_Form4.cmdSave.caption("Save")
+gui.SS_Form4.cmdSave.visible(True)
+gui.SS_Form4.cmdSave.size(1000,375)
+gui.SS_Form4.cmdSave.zorder(0)
+gui.SS_Form4.cmdSave.position(100,1550)
+gui.SS_Form4.cmdSave.enabled(True)
+gui.SS_Form4.cmdSave.fontname("Arial")
+gui.SS_Form4.cmdSave.fontsize(8)
+gui.SS_Form4.cmdSave.event(click,cmdSave_DelDate)
+gui.SS_Form4.cmdSave.defaultvalue("")
+gui.SS_Form4.cmdSave.controlgroup(0)
+gui.SS_Form4.cmdDelete.create(button)
+gui.SS_Form4.cmdDelete.caption("Delete")
+gui.SS_Form4.cmdDelete.visible(True)
+gui.SS_Form4.cmdDelete.size(1000,375)
+gui.SS_Form4.cmdDelete.zorder(0)
+gui.SS_Form4.cmdDelete.position(1185,1550)
+gui.SS_Form4.cmdDelete.enabled(True)
+gui.SS_Form4.cmdDelete.fontname("Arial")
+gui.SS_Form4.cmdDelete.fontsize(8)
+gui.SS_Form4.cmdDelete.event(click,cmdDelete_DelDate)
+gui.SS_Form4.cmdDelete.defaultvalue("")
+gui.SS_Form4.cmdDelete.controlgroup(0)
+
+
+gui.SS_Form1..create
+gui.SS_Form1..caption("SO Line History Comments")
+gui.SS_Form1..size(6375,3035)
+gui.SS_Form1..minx(0)
+gui.SS_Form1..miny(0)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,ss_form4_unload)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(True)
+gui.SS_Form1..minbutton(True)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(True)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.lblOrder.create(label,"Order No.",True,1800,255,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lblOrder.defaultvalue("")
+gui.SS_Form1.lblOrder.controlgroup(0)
+gui.SS_Form1.lblComments.create(label,"Comments",True,1800,255,1,100,835,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.lblComments.defaultvalue("")
+gui.SS_Form1.lblComments.controlgroup(0)
+gui.SS_Form1.txtOrder.create(textbox,"",True,1800,300,0,100,335,True,0,Arial,8,-2147483643,1)
+gui.SS_Form1.txtOrder.defaultvalue("")
+gui.SS_Form1.txtOrder.controlgroup(0)
+gui.SS_Form1.txtComments.create(textboxm)
+gui.SS_Form1.txtComments.text("")
+gui.SS_Form1.txtComments.visible(True)
+gui.SS_Form1.txtComments.size(5850,855)
+gui.SS_Form1.txtComments.zorder(0)
+gui.SS_Form1.txtComments.position(100,1035)
+gui.SS_Form1.txtComments.enabled(True)
+gui.SS_Form1.txtComments.alignment(0)
+gui.SS_Form1.txtComments.fontname("Arial")
+gui.SS_Form1.txtComments.fontsize(8)
+gui.SS_Form1.txtComments.BackColor(-2147483643)
+gui.SS_Form1.txtComments.defaultvalue("")
+gui.SS_Form1.txtComments.controlgroup(0)
+gui.SS_Form1.cmdDelete.create(button)
+gui.SS_Form1.cmdDelete.caption("Delete")
+gui.SS_Form1.cmdDelete.visible(True)
+gui.SS_Form1.cmdDelete.size(1000,375)
+gui.SS_Form1.cmdDelete.zorder(0)
+gui.SS_Form1.cmdDelete.position(1185,2060)
+gui.SS_Form1.cmdDelete.enabled(True)
+gui.SS_Form1.cmdDelete.fontname("Arial")
+gui.SS_Form1.cmdDelete.fontsize(8)
+gui.SS_Form1.cmdDelete.event(click,cmdDelete_Comments)
+gui.SS_Form1.cmdDelete.defaultvalue("")
+gui.SS_Form1.cmdDelete.controlgroup(0)
+gui.SS_Form1.cmdSave.create(button)
+gui.SS_Form1.cmdSave.caption("Save")
+gui.SS_Form1.cmdSave.visible(True)
+gui.SS_Form1.cmdSave.size(1000,375)
+gui.SS_Form1.cmdSave.zorder(0)
+gui.SS_Form1.cmdSave.position(100,2060)
+gui.SS_Form1.cmdSave.enabled(True)
+gui.SS_Form1.cmdSave.fontname("Arial")
+gui.SS_Form1.cmdSave.fontsize(8)
+gui.SS_Form1.cmdSave.event(click,cmdSave_Comments)
+gui.SS_Form1.cmdSave.defaultvalue("")
+gui.SS_Form1.cmdSave.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Variable.Global.sOrder.Declare(String)
+Variable.Global.sOrderLine.Declare(String)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+Gui.SS_Form5..Show
+
+
+Program.Sub.Main.End
+
+Program.Sub.UNLOAD.Start
+F.ODBC.Connection!conx.Close
+F.Intrinsic.Control.End
+
+Program.Sub.UNLOAD.End
+
+Program.Sub.cmd_DelDate.Start
+V.Local.sSQL.Declare(String)
+V.Local.bTable.Declare(Boolean)
+V.local.OL.Declare(String)
+
+'-----------------------------------------------------------------------------------------
+'CHECK IF TABLE EXISTS. IF IT DOES NOT, GIVE ERROR AND EXIT PROGRAM
+'-----------------------------------------------------------------------------------------
+F.ODBC.Connection!ConX.TableExists("GCG_SO_LINE_DATEDEL",V.Local.bTable)
+F.Intrinsic.Control.If(V.Local.bTable,=,False)
+	F.intrinsic.ui.msgbox("Missing Table GCG_SO_LINE_DATEDEL. Please Create Table and Try Again")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+'-----------------------------------------------------------------------------------------
+'GET ORDER AND LINE NO. SAVE TO  GLOBAL VARIABLES - PAD TO MATCH REQUIRED LENGTH
+'-----------------------------------------------------------------------------------------
+'Get Order and Line Numbers
+V.Global.sOrder.Set(V.Passed.000002)
+V.Global.sOrderLine.Set(V.Passed.ITEM)
+
+'Check to make sure an Order has been selected. If not, give error, and exit program
+F.Intrinsic.Control.If(V.Global.sOrder,=,"")
+	F.Intrinsic.UI.Msgbox("You Must Select an Order First")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+'Pad Order No to match required length of 7. Pad with preceeding 0's
+F.Intrinsic.String.LPad(V.Global.sOrder,"0",7,V.Global.sOrder)
+
+'Pad Order Line to match required length of 4. Pad with pad 0's
+F.Intrinsic.String.LPad(V.Global.sOrderLine,"0",3,V.Global.sOrderLine)
+F.Intrinsic.String.RPad(V.Global.sOrderLine,"0",4,V.Global.sOrderLine)
+'-----------------------------------------------------------------------------------------
+'CHECK IF DELIVERY DATE RECORD EXIST IN TABLE. IF IT DOES, DISPLAY IT, OTHERWISE, DISPLAYDEFAULT DATE PICKER DATE
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.String.Concat("SELECT * FROM GCG_SO_LINE_DATEDEL WHERE ORDER_NO = '",V.Global.sOrder,"' AND ORDER_LINE = '",V.GLOBAL.sOrderLine,"'",V.Local.sSQL)
+F.ODBC.Connection!ConX.OpenLocalRecordsetRO("rstDELDate",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.ConX!rstDELDate.EOF,=,False)
+'Set Date from record
+	F.Intrinsic.String.Concat(V.ODBC.ConX!rstDELDate.FieldValTrim!ORDER_NO," - ",V.ODBC.ConX!rstDELDate.FieldValTrim!ORDER_LINE,V.Local.OL)
+	Gui.SS_Form4.txtOrderLine.Text(V.Local.OL)
+	Gui.SS_Form4.dtpDELDATE.Value(V.ODBC.ConX!rstDELDate.FieldVal!DATE_DEL)
+	Gui.SS_Form4.txtOrderLine.Enabled(False)
+F.Intrinsic.Control.Else
+'Set "order" from variable.
+	F.Intrinsic.String.Concat(V.Global.sOrder," - ",V.Global.sOrderLine,V.Local.OL)
+	Gui.SS_Form4.txtOrderLine.Text(V.Local.OL)
+	Gui.SS_Form4.txtOrderLine.Enabled(False)
+	Gui.SS_Form4.cmdDelete.Enabled(False)
+F.Intrinsic.Control.EndIf
+'close recordset
+F.ODBC.ConX!rstDELDate.Close
+'show form
+Gui.SS_FORM4..SHOW
+
+Program.Sub.cmd_DelDate.End
+
+Program.Sub.cmd_Comments.Start
+V.Local.bTable.Declare(Boolean)
+V.Local.sSQL.Declare(String)
+V.Local.sOrderLine.Declare(String)
+'-----------------------------------------------------------------------------------------
+'CHECK IF TABLE EXISTS. IF IT DOES NOT, CLOSE CONNECTION, AND EXIT PROGRAM
+'-----------------------------------------------------------------------------------------
+F.ODBC.Connection!ConX.TableExists("GCG_SO_COMMENTS",V.Local.bTable)
+F.Intrinsic.Control.If(V.Local.bTable,=,False)
+	F.intrinsic.ui.msgbox("Missing Table GCG_SO_COMMENTS. Please Create Table and Try Again")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.Endif
+'-----------------------------------------------------------------------------------------
+'GET ORDER NO. SAVE TO A GLOBAL VARIABLE - PAD TO MATCH REQUIRED LENGTH
+'-----------------------------------------------------------------------------------------
+'Get Order Number
+V.Global.sOrder.Set(V.Passed.000002)
+V.Global.sOrderLine.Set(V.Passed.ITEM)
+
+'Check to make sure an Order has been selected. If not, give error, and exit program
+F.Intrinsic.Control.If(V.Global.sOrder,=,"")
+	F.Intrinsic.UI.Msgbox("You Must Select an Order First")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+'Pad Order No to match required length of 7. Pad with preceeding 0's
+F.Intrinsic.String.LPad(V.Global.sOrder,"0",7,V.Global.sOrder)
+F.Intrinsic.String.LPad(V.Global.sOrderLine,"0",3,V.Global.sOrderLine)
+F.Intrinsic.String.RPad(V.Global.sOrderLine,"0",4,V.Global.sOrderLine)
+'-----------------------------------------------------------------------------------------
+'CHECK IF COMMENTS RECORD EXIST IN TABLE. IF THEY DO, DISPLAY THEM, OTHERWISE, DISPLAY BLANK FORM
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.String.Concat("SELECT * FROM GCG_SO_COMMENTS WHERE ORDER_NO = '",V.Global.sOrder,"' AND ORDER_LINE = '",V.Global.sOrderLine,"'",V.Local.sSQL)
+F.ODBC.Connection!ConX.OpenLocalRecordsetRO("rstComments",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.ConX!rstComments.EOF,=,False)
+'Set text from record
+	F.Intrinsic.String.Concat(V.ODBC.ConX!rstComments.FieldValTrim!ORDER_NO," - ",V.ODBC.ConX!rstComments.FieldValTrim!ORDER_LINE,V.Local.sOrderLine)
+	Gui.SS_Form1.txtOrder.Text(V.Local.sOrderLine)
+	Gui.SS_Form1.txtComments.Text(V.ODBC.ConX!rstComments.FieldValTrim!COMMENTS)
+	Gui.SS_Form1.txtOrder.Enabled(False)
+F.Intrinsic.Control.Else
+'Set "order" from variable.
+	F.Intrinsic.String.Concat(V.Global.sOrder," - ",V.Global.sLine,V.Local.sOrderLine)
+	Gui.SS_Form1.txtOrder.Text(V.Local.sOrderLine)
+	Gui.SS_Form1.txtOrder.Enabled(False)
+	Gui.SS_Form1.cmdDelete.Enabled(False)
+F.Intrinsic.Control.EndIf
+'close recordset
+F.ODBC.ConX!rstComments.Close
+'show form
+Gui.SS_FORM1..Show
+
+Program.Sub.cmd_Comments.End
+
+Program.Sub.cmdSave_Comments.Start
+V.Local.sSQL.Declare(String)
+'-----------------------------------------------------------------------------------------
+'CHECK TO MAKE SURE USER HAS ENTERED TEXT. IF THERE IS TEXT, CHECK TABLE TO FIND OUT IF A RECORD ALREADY EXISTS FOR THIS ORDER. IF IT DOES, UPDATE, IF NOT, ADD A NEW RECORD
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.Control.If(V.Screen.SS_Form1!txtComments.Text,<>,"")
+	F.Intrinsic.String.Concat("SELECT * FROM GCG_SO_COMMENTS WHERE ORDER_NO = '",V.Global.sOrder,"' AND ORDER_LINE = '",V.Global.sOrderLine,"'",V.Local.sSQL)
+	F.ODBC.Connection!ConX.OpenLocalRecordsetRW("rstComments",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.ConX!rstComments.EOF,=,True)
+		F.ODBC.ConX!rstComments.AddNew
+		F.ODBC.ConX!rstComments.Set!ORDER_NO(V.Global.sOrder)
+		F.ODBC.ConX!rstComments.Set!ORDER_LINE(V.Global.sOrderLine)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.ConX!rstComments.Set!COMMENTS(V.Screen.SS_Form1!txtComments.Text)
+	F.ODBC.ConX!rstComments.Update
+	F.ODBC.ConX!rstComments.Close
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("You Must Enter Text in the "Comments" Section to Save")
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.EndIf
+
+Program.Sub.cmdSave_Comments.End
+
+Program.Sub.cmdDelete_Comments.Start
+V.local.sSQL.Declare(String)
+'-----------------------------------------------------------------------------------------
+'DELETE RECORD FROM TABLE THAT MATCHES SELECTED ORDER. THEN EXIT PROGRAM
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.String.Concat("DELETE FROM GCG_SO_COMMENTS WHERE ORDER_NO ='",V.Global.sOrder,"' AND ORDER_LINE = '",V.Global.sOrderLine,"'",V.Local.sSQL)
+F.ODBC.Connection!ConX.Execute(V.Local.sSQL)
+F.Intrinsic.Control.CallSub(Unload)
+
+Program.Sub.cmdDelete_Comments.End
+
+Program.Sub.cmdSave_DelDate.Start
+V.Local.sSQL.Declare(String)
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.String.Concat("SELECT * FROM GCG_SO_LINE_DATEDEL WHERE ORDER_NO = '",V.Global.sOrder,"' AND ORDER_LINE = '",V.Global.sOrderLine,"'",V.Local.sSQL)
+F.ODBC.Connection!ConX.OpenLocalRecordsetRW("rstDateDel",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.ConX!rstDateDel.EOF,=,True)
+	F.ODBC.ConX!rstDateDel.AddNew
+	F.ODBC.ConX!rstDateDel.Set!ORDER_NO(V.Global.sOrder)
+	F.ODBC.ConX!rstDateDel.Set!ORDER_LINE(V.Global.sOrderLine)
+	F.ODBC.ConX!rstDateDel.Set!INVOICE_NO(V.Passed.INVOICE)
+	
+F.Intrinsic.Control.EndIf
+F.ODBC.ConX!rstDateDel.Set!DATE_DEL(V.Screen.SS_Form4!dtpDelDate.Value)
+F.ODBC.ConX!rstDateDel.Update
+F.ODBC.ConX!rstDateDel.Close
+F.Intrinsic.Control.CallSub(Unload)
+
+Program.Sub.cmdSave_DelDate.End
+
+Program.Sub.cmdDelete_DelDate.Start
+'-----------------------------------------------------------------------------------------
+'DECLARE VARIABLES
+'-----------------------------------------------------------------------------------------
+V.Local.sError.Declare(String)
+V.Local.sSQL.Declare(String)
+
+
+F.Intrinsic.String.Concat("DELETE FROM GCG_SO_LINE_DATEDEL WHERE ORDER_NO='",V.Global.sOrder,"' AND ORDER_LINE ='",V.Global.sOrderLine,"'",V.Local.sSQL)
+F.ODBC.Connection!ConX.Execute(V.Local.sSQL)
+F.Intrinsic.Control.CallSub(Unload)
+
+Program.Sub.cmdDelete_DelDate.End
+
+program.sub.ss_form4_unload.start
+Gui.SS_Form1..Visible(False)
+Gui.SS_Form4..Visible(False)
+Gui.SS_Form5..Visible(True)
+
+
+program.sub.ss_form4_unload.end
+
+Program.Sub.Comments.Start
+${$0$}$GCG_ORDHIST_DATE_COMMENTS-33008$}$BLEFLER$}$2/20/2014
+Program.Sub.Comments.End
+
