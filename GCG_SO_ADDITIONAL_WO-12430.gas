@@ -1,0 +1,196 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form6..create
+gui.SS_Form6..caption("Additional WO")
+gui.SS_Form6..size(4550,2510)
+gui.SS_Form6..minx(0)
+gui.SS_Form6..miny(0)
+gui.SS_Form6..position(0,0)
+gui.SS_Form6..event(unload,UNLOAD)
+gui.SS_Form6..alwaysontop(False)
+gui.SS_Form6..fontname("Arial")
+gui.SS_Form6..fontsize(8)
+gui.SS_Form6..forecolor(0)
+gui.SS_Form6..fontstyle(,,,,)
+gui.SS_Form6..BackColor(-2147483633)
+gui.SS_Form6..controlbox(True)
+gui.SS_Form6..maxbutton(True)
+gui.SS_Form6..minbutton(True)
+gui.SS_Form6..mousepointer(0)
+gui.SS_Form6..moveable(True)
+gui.SS_Form6..sizeable(True)
+gui.SS_Form6..ShowInTaskBar(True)
+gui.SS_Form6..titlebar(True)
+gui.SS_Form6.lblOrderLine.create(label,"Order/Line",True,1800,255,1,100,135,False,0,Arial,8,-2147483633,0)
+gui.SS_Form6.lblOrderLine.defaultvalue("")
+gui.SS_Form6.lblOrderLine.controlgroup(0)
+gui.SS_Form6.txtOrderLine.create(textbox,"",True,1800,300,0,100,335,True,0,Arial,8,-2147483643,1)
+gui.SS_Form6.txtOrderLine.defaultvalue("")
+gui.SS_Form6.txtOrderLine.controlgroup(0)
+gui.SS_Form6.lblSuffix.create(label,"Suffix",True,1800,255,1,1985,835,True,0,Arial,8,-2147483633,0)
+gui.SS_Form6.lblSuffix.defaultvalue("")
+gui.SS_Form6.lblSuffix.controlgroup(0)
+gui.SS_Form6.lblJob.create(label,"Job",True,1800,255,1,100,835,True,0,Arial,8,-2147483633,0)
+gui.SS_Form6.lblJob.defaultvalue("")
+gui.SS_Form6.lblJob.controlgroup(0)
+gui.SS_Form6.txtJob.create(textbox,"",True,1800,330,0,100,1035,True,0,Arial,8,-2147483643,1)
+gui.SS_Form6.txtJob.defaultvalue("")
+gui.SS_Form6.txtJob.controlgroup(0)
+gui.SS_Form6.txtSuffix.create(textbox,"",True,1800,330,0,1985,1035,True,0,Arial,8,-2147483643,1)
+gui.SS_Form6.txtSuffix.defaultvalue("")
+gui.SS_Form6.txtSuffix.controlgroup(0)
+gui.SS_Form6.cmdBrowseWO.create(button)
+gui.SS_Form6.cmdBrowseWO.caption("^")
+gui.SS_Form6.cmdBrowseWO.visible(True)
+gui.SS_Form6.cmdBrowseWO.size(330,330)
+gui.SS_Form6.cmdBrowseWO.zorder(0)
+gui.SS_Form6.cmdBrowseWO.position(3870,1035)
+gui.SS_Form6.cmdBrowseWO.enabled(True)
+gui.SS_Form6.cmdBrowseWO.fontname("Arial")
+gui.SS_Form6.cmdBrowseWO.fontsize(8)
+gui.SS_Form6.cmdBrowseWO.event(click,cmdbrowsewo_click)
+gui.SS_Form6.cmdBrowseWO.defaultvalue("")
+gui.SS_Form6.cmdBrowseWO.controlgroup(0)
+gui.SS_Form6.cmdSave.create(button)
+gui.SS_Form6.cmdSave.caption("Save")
+gui.SS_Form6.cmdSave.visible(True)
+gui.SS_Form6.cmdSave.size(1000,375)
+gui.SS_Form6.cmdSave.zorder(0)
+gui.SS_Form6.cmdSave.position(100,1535)
+gui.SS_Form6.cmdSave.enabled(True)
+gui.SS_Form6.cmdSave.fontname("Arial")
+gui.SS_Form6.cmdSave.fontsize(8)
+gui.SS_Form6.cmdSave.event(click,cmdsave_click)
+gui.SS_Form6.cmdSave.defaultvalue("")
+gui.SS_Form6.cmdSave.controlgroup(0)
+gui.SS_Form6.cmdDelete.create(button)
+gui.SS_Form6.cmdDelete.caption("Delete")
+gui.SS_Form6.cmdDelete.visible(True)
+gui.SS_Form6.cmdDelete.size(1000,375)
+gui.SS_Form6.cmdDelete.zorder(0)
+gui.SS_Form6.cmdDelete.position(1185,1535)
+gui.SS_Form6.cmdDelete.enabled(True)
+gui.SS_Form6.cmdDelete.fontname("Arial")
+gui.SS_Form6.cmdDelete.fontsize(8)
+gui.SS_Form6.cmdDelete.event(click,cmddelete_click)
+gui.SS_Form6.cmdDelete.defaultvalue("")
+gui.SS_Form6.cmdDelete.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+
+F.Intrinsic.Control.if(V.Caller.Hook,=,12430)
+	f.Intrinsic.Control.CallSub(GetAddWO)
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Main.End
+
+program.sub.UNLOAD.start
+F.ODBC.Connection!conx.Close
+F.Intrinsic.Control.End
+
+program.sub.UNLOAD.end
+
+program.sub.cmddelete_click.start
+V.Local.sLine.Declare(String)
+V.Local.sOrder.Declare(String)
+V.Local.sOrderLine.Declare(String)
+V.Local.sSQL.Declare(String)
+F.Intrinsic.String.LPad(V.Passed.000060,"0",7,V.Local.sOrder)
+F.Intrinsic.String.LPad(V.Passed.000051,"0",3,V.Local.sLine)
+F.Intrinsic.String.RPad(V.Local.sLine,"0",4,V.Local.sLine)
+F.Intrinsic.String.Concat(V.Local.sOrder,"-",V.Local.sLine,V.Local.sOrderLine)
+'-----------------------------------------------------------------------------------------
+'EXECUTE DELETE STATEMENT TO DELETE ANY JOBS ASSOCIATED TO THIS ORDER/LINE
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.String.Concat("DELETE FROM GCG_ADDITIONAL_WO WHERE ORDER_LINE ='",V.Local.sOrderLine,"'",V.Local.sSQL)
+F.ODBC.Connection!ConX.Execute(V.Local.sSQL)
+Gui.SS_Form6.txtJob.Text("")
+Gui.SS_Form6.txtSuffix.Text("")
+F.Intrinsic.Control.CallSub(Unload)
+
+program.sub.cmddelete_click.end
+
+program.sub.cmdsave_click.start
+V.Local.sOrderLine.Declare(String)
+V.Local.sOrder.Declare(String)
+V.Local.sLine.Declare(String)
+V.Local.sSQL.Declare(String)
+F.Intrinsic.String.LPad(V.Passed.000060,"0",7,V.Local.sOrder)
+F.Intrinsic.String.LPad(V.Passed.000051,"0",3,V.Local.sLine)
+F.Intrinsic.String.RPad(V.Local.sLine,"0",4,V.locAL.sLine)
+F.Intrinsic.String.Concat(V.Local.sOrder,"-",V.Local.sLine,V.Local.sOrderLine)
+'-----------------------------------------------------------------------------------------
+'CHECK IF RECORD ALREADY EXISTS. IF IT DOES, UPDATE, OTHERWISE, ADD NEW
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.Control.If(V.Screen.SS_Form6!txtJob.Text,<>,"")
+	F.Intrinsic.String.Concat("SELECT * FROM GCG_ADDITIONAL_WO WHERE ORDER_LINE ='",V.Local.sOrderLine,"'",V.Local.sSQL)
+	F.ODBC.Connection!ConX.OpenLocalRecordsetRW("rst",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.ConX!rst.EOF,=,True)
+		F.ODBC.ConX!rst.AddNew
+		F.ODBC.conx!rst.Set!ORDER_LINE(V.Local.sOrderLine)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.ConX!rst.Set!JOB(V.Screen.SS_Form6!txtJob.Text)
+	F.ODBC.ConX!rst.Set!SUFFIX(V.Screen.SS_Form6!txtSuffix.Text)
+	F.ODBC.ConX!rst.Update
+	F.ODBC.ConX!rst.Close
+	F.Intrinsic.Control.CallSub(Unload)
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("YOU MUST SELECT A JOB TO SAVE","ERROR")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+program.sub.cmdsave_click.end
+
+program.sub.cmdbrowsewo_click.start
+V.Local.sRet.Declare(String)
+'-----------------------------------------------------------------------------------------
+'OPEN BROWSER
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.UI.Browser(1000,"",V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form6.txtJob.Text(V.Local.sRet(0))
+	Gui.SS_Form6.txtSuffix.text(V.Local.sRet(1))
+F.Intrinsic.Control.Endif
+
+program.sub.cmdbrowsewo_click.end
+
+Program.Sub.GetAddWO.Start
+
+V.Local.sOrderLine.Declare(String)
+V.local.sOrderTemp.Declare(String)
+V.Local.sLineTemp.Declare(String)
+V.Local.sSQL.Declare(String)
+'-----------------------------------------------------------------------------------------
+'Get Record if They Exist
+'-----------------------------------------------------------------------------------------
+F.Intrinsic.String.LPad(V.Passed.000060,"0",7,V.Local.sOrderTemp)
+F.Intrinsic.String.LPad(V.Passed.000051,"0",3,V.Local.sLineTemp)
+F.Intrinsic.String.RPad(V.Local.sLineTemp,"0",4,V.Local.sLineTemp)
+F.Intrinsic.String.Concat(V.Local.sOrderTemp,"-",V.local.sLineTemp,V.Local.sOrderLine)
+Gui.SS_Form6.txtOrderLine.Text(V.Local.sOrderline)
+
+F.Intrinsic.String.Concat("SELECT * FROM GCG_ADDITIONAL_WO WHERE ORDER_LINE = '",V.Local.sOrderLine,"'",V.Local.sSQL)
+F.ODBC.Connection!ConX.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.ConX!rst.EOF,=,True)
+	Gui.SS_Form6..Show
+F.Intrinsic.Control.Else
+	Gui.SS_Form6.txtJob.Text(V.ODBC.ConX!rst.FieldValTrim!JOB)
+	Gui.SS_Form6.txtSuffix.Text(V.ODBC.ConX!rst.FieldValTrim!SUFFIX)
+	Gui.SS_Form6..Show
+F.Intrinsic.Control.EndIf
+F.ODBC.ConX!rst.Close
+
+Program.Sub.GetAddWO.End
+
+Program.Sub.Comments.Start
+${$0$}$GCG_SO_ADDITIONAL_WO$}$BLEFLER$}$2/20/2014
+Program.Sub.Comments.End
+
